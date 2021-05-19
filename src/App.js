@@ -42,6 +42,16 @@ function App() {
 
   return (
     <main>
+      <div id='cabecalho'>
+        <h1>LOJINHA DO SEU ZÉ</h1>
+      </div>
+      <div id='menu'>
+        <ul>
+          <li><a href="#">HOME</a></li>
+          <li><a href="#">PRODUTOS</a></li>
+          <li><a href="#">CONTATO</a></li>
+        </ul>
+      </div>
       {
         nomesSelecionados.length > 0 && (
           <div>
