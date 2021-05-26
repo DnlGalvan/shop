@@ -1,13 +1,26 @@
 import './App.css';
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
+import dados from './produtos.json';
 
 function App() {
 
+  const [produtos, setProdutos] = useState([dados.itens])
   const [nomes, setNomes] = useState([])
   const [precos, setPrecos] = useState([])
   const [nomesSelecionados, setNomesSelecionados] = useState([])
   const [precosSelecionados, setPrecosSelecionados] = useState([])
+
+  useEffect( () => {
+    setProdutos(dados.itens);
+  }, [])
   
+  function filtrar() {
+    //lembrar de colocar o .value para pegar o valor digitado
+    var texto = document.getElementById('pesquisa').value
+    var filtrados = dados.itens.filter( (produto) => produto.nome.includes(texto))
+    setProdutos(filtrados)
+  }
+
   function cadastrar() {
     var nome = document.getElementById('nome').value
     var valor = document.getElementById('valor').value
@@ -67,18 +80,17 @@ function App() {
         )
       }
       <div>
-        <input type='text' id='nome' placeholder='Nome do produto'/>
-        <input type='number' id='valor' placeholder='Valor do produto'/>
-        <button onClick={cadastrar}>Cadastrar</button>
+        <input type='text' id='pesquisa' placeholder='Nome do produto'/>
+        <button onClick={filtrar}>Filtrar</button>
       </div>
       <div>
         {
-          nomes.map( (item, index) =>(
+          produtos.map( (item, index) =>(
             <div key={index}>
-              <img alt='Foto do produto' width={160} src='https://blackmantkd.com/wp-content/uploads/2017/04/default-image-620x600.jpg'/>
-              <h2>{item}</h2>
-              <h4>{precos[index]}</h4>
-              <button onClick={() => comprar(item, precos[index])}>Comprar</button>
+              <img alt='Foto do produto' width={160} src={item.imagem}/>
+              <h2>{item.nome}</h2>
+              <h4>{item.preco}</h4>
+              <button onClick={() => comprar(item.nome, item.preco)}>Comprar</button>
             </div>
           ))
         }

@@ -51,12 +51,10 @@
   color: #ffffff;
   text-align: center;
   background-color: black;
-  float: left;
   margin: 0 auto;
   font-size: 50px;
   position: relative;
   top: 50%;
-  transform: translateX(113%);
 }
 
 #menu {
